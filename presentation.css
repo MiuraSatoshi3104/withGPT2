@@ -1,0 +1,338 @@
+header {
+    height: 100px;
+    width: 100vw;
+    background-color: black;
+    position: fixed;
+    top: 0px;
+    z-index: 10;
+
+}
+span{
+    color: red;
+    /* font-size: 25px; */
+}
+
+/* change my self change the world */
+header h1 {
+    position: relative;
+    font-size: 35px;
+    text-align: left;
+    margin-left: 170px;
+    color: white;
+    /* margin: top 100px auto; */
+}
+
+header ul {
+    color: white;
+    font-size: 25px;
+    float: right;
+    margin-right: 50px;
+    margin-top: 10px;
+    /* font: bold; */
+    /* list-style: none; */
+    /* display: inline; */
+}
+
+/* .header {
+    background-color: rgb(98, 235, 235);
+    height: 85px;
+} */
+
+/* アバターロゴ */
+.logo {
+    position: absolute;
+    top: -20px;
+    left: -10px;
+    width: 100px;
+    margin: 30px;
+}
+
+/* 1ページ目 */
+.top-wrapper {
+    position: relative;
+    grid-area: top-wrapper;
+    background-color: white;
+    height: 900px;
+    width: 100vw;
+}
+
+.intromyself {
+    background-color: white;
+    font-size: 30px;
+    margin: 20px;
+    position: absolute;
+    top: 90px;
+    left: 10px;
+}
+
+/* 自己紹介 */
+.introduce {
+    position: absolute;
+    top: 140px;
+    left: 50px;
+    background-color: white;
+    font-size: 20px;
+    height: 200px;
+    width: 500px;
+    margin: 5px;
+}
+.tag{
+    position: absolute;
+    top: 540px;
+    left: 50px;
+    background-color: white;
+    font-size: 20px;
+    height: 200px;
+    width: 500px;
+    margin: 5px;
+}
+
+/* ソムリエ賞状 */
+.img1 {
+    position: absolute;
+    /* top: 450px; */
+    left: 750px;
+    bottom: 120px;
+    margin: 10px;
+    width: 500px;
+    height: 300px;
+}
+
+/* ジーンズ画像 */
+.img2 {
+    position: absolute;
+    left: 750px;
+    top: 90px;
+    margin: 10px;
+    width: 500px;
+    height: 350px;
+}
+
+/* ライフライン */
+.img3 {
+    position: absolute;
+    top: 310px;
+    left: 10px;
+    bottom: 20px;
+    margin: 10px;
+    width: 600px;
+    height: 350px;
+}
+
+/* 2段落目 */
+.second-wrapper {
+    position: relative;
+    grid-area: second-wrapper;
+    background-color: whitesmoke;
+    height: 950px;
+}
+
+h2 {
+    font-size: 40px;
+}
+
+/* タブ切り替え */
+HTML CSS JSResult Skip Results Iframe EDIT ON .tab-group {
+    position: absolute;
+    /* display: flex; */
+    justify-content: center;
+    /* top: 150px;
+  left:500px; */
+}
+
+.tab {
+    /* position:absolute; */
+    width: 500px;
+    height: 15px;
+    left: 100px;
+    display: block;
+    top: 500px;
+    flex-grow: 1;
+    padding: 10px;
+    list-style: none;
+    border: solid 2px #CCC;
+    text-align: center;
+    cursor: pointer;
+}
+
+.panel-group {
+    height: 400px;
+    width: 600px;
+    position: absolute;
+    left: 650px;
+    top: 100px;
+    font-size: 30px;
+    /* float: right; */
+    border: solid 1px #CCC;
+    border-top: none;
+    background: #eee;
+}
+
+.panel {
+    display: none;
+}
+
+.tab.is-active {
+    background: black;
+    color: #FFF;
+    transition: all 0.2s ease-out;
+}
+
+.panel.is-show {
+    display: block;
+    height: 100px;
+    left: 500px;
+}
+
+/* codeのせるエリア */
+/* .codeshow {
+    position: absolute;
+    background-color: lightgrey;
+    height: 600px;
+    width: 500px;
+    margin: 20px;
+} */
+
+.aruaru {
+    position: absolute;
+    top: 600px;
+    left: 700px;
+    font-size:30px ;
+}
+
+/* 基準位置 */
+.third-wrapper {
+    position: relative;
+    grid-area: third-wrapper;
+    background-color: white;
+    height: 950px;
+}
+
+
+
+/* 自己成長コメント */
+.tomyself {
+    background-color: white;
+    font-size: 40px;
+    margin: 20px;
+    position: absolute;
+    top: 50px;
+    left: 20px;
+}
+
+/* 自分の成長コメント１ */
+.p3 {
+    position: absolute;
+    display: inline-block;
+    background-color: white;
+    font-size: 30px;
+    top: 100px;
+    left: 100px;
+}
+
+/* 自分の成長コメント２ */
+.p2 {
+    position: absolute;
+    display: inline-block;
+    background-color: white;
+    font-size: 30px;
+    top: 200px;
+    left: 100px;
+}
+
+/* 自分の成長コメント３ */
+.p1 {
+    position: absolute;
+    display: inline-block;
+    background-color: white;
+    font-size: 30px;
+    top: 300px;
+    left: 100px;
+}
+
+/* クラスへのコメント */
+.toclass {
+    background-color: white;
+    font-size: 40px;
+    margin: 20px;
+    position: absolute;
+    top: 430px;
+    left: 20px;
+}
+
+.p4 {
+    position: absolute;
+    display: inline-block;
+    background-color: white;
+    font-size: 30px;
+    top: 490px;
+    left: 100px;
+}
+
+.tocoach {
+    background-color: white;
+    font-size: 40px;
+    margin: 20px;
+    position: absolute;
+    top: 600px;
+    left: 20px;
+}
+
+.p5 {
+    position: absolute;
+    display: inline-block;
+    background-color: white;
+    font-size: 30px;
+    top: 660px;
+    left: 100px;
+}
+
+
+
+
+.footer {
+    position: relative;
+    background-color: black;
+    height: 120px;
+    font-size: 15px;
+}
+
+a {
+    font-size: 30px;
+    color: white;
+}
+
+a:link {
+    color: blue;
+}
+
+a:visited {
+    color: purple;
+}
+
+a:hover {
+    color: green;
+}
+
+a:active {
+    color: grey;
+}
+
+h3{
+    color: white;
+    font-size: 30px;
+    position: absolute;
+    left: 100px;
+    margin:40px;
+}
+.footer-list a {
+    color: blue;
+    font-size: 20px;
+    /* float: right; */
+    /* right: 50px; */
+    margin: 0px  0px  0px  1300px;
+}
+
+/* .footer a {
+    color:white;
+ } */

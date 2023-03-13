@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <script type="text/javascript" src="modules/lodash.js"></script>
+    <script type="text/javascript" src="test-boilerplate.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="https://MiuraSatoshi3104.github.io/Satoshi_Miura/presentation.css">
+    <!--↓javascriptの処理追加-->
+    <script type="text/javascript">
+        function comment() {
+            if (comment_form.number.value >= 21) {
+                window.confirm("20以下の数値を入力して下さい!");
+                return false;
+            } else if (comment_form.number.value == 1) {
+                window.confirm("VSCODEのフォルダ構成がわからず迷子ー、質問もどうすれば良いかわからないー");
+                return true;
+            } else if (comment_form.number.value == 4) {
+                window.confirm("わからないことは、Helpチャンネルでって言われても、今の自分の状態を言語化できないから質問もできないー!!");
+                return true;
+            } else if (typeof comment_form.number.value !== "number") {
+                window.confirm("20以下の数値型データを入力してください!");
+                return true;
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+    <header>
+        <img class="logo"
+            src="https://github.com/MiuraSatoshi3104/Satoshi_Miura/blob/master-branch/%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3.jpg?raw=true">
+        <h1>Change myself Change the world!
+
+            <!-- <div class="header-list"> -->
+            <ul>■ 成長の軌跡 </ul>
+            <ul>■ 課題</ul>
+            <ul>■ 自己紹介</ul>
+        </h1>
+        <!-- </div> -->
+    </header>
+
+    <div class="header"></div>
+    <!--P1相当-->
+
+    <div class="top-wrapper">
+        <p class="intromyself">
+            <自己紹介>
+                <div class="introduce">
+                    <p>名前: 三浦　哲（さとし）</p>
+                    <p>部署名：　高岡塗装成形製造技術部</p>
+                    <p>・樹脂部品 ex)バンパーとボデー塗装を扱う集団</p>
+                    <p class="tag">タグ：　<span>＃ジーンズソムリエ</span> #学生との2足の草鞋
+                        #革製品が好きすぎる　#フランス語少し話せます　#名古屋市名東区　#かつ丼　#ジョグ200km/月</p>
+                </div>
+        </p>
+
+        <img class="img1"
+            src="https://github.com/MiuraSatoshi3104/Satoshi_Miura/blob/master-branch/%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%891.JPG?raw=true">
+        <img class="img2"
+            src="https://github.com/MiuraSatoshi3104/Satoshi_Miura/blob/master-branch/%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%892.JPG?raw=true">
+        <img class="img3"
+            src="https://github.com/MiuraSatoshi3104/Satoshi_Miura/blob/master-branch/lifelinechart.jpg?raw=true">
+
+
+
+
+    </div>
+
+    <div class="second-wrapper">
+        <!--P2相当-->
+        <div class="codeshow"></div>
+        <div class="aruaru">
+            <form action="how-to-index.html" method="get" name="comment_form">
+                <p>DIG基礎講座あるあるが言いたい!<br>
+                    印象に残っているLessonナンバーは？？<br>
+                    <input type="text" name="number">
+                </p>
+                <p><input type="button" value="あるある知りたい人はPUSH" id="button2" onClick="return comment();"></p>
+            </form>
+        </div>
+
+        <!--タブを追加実装-->
+        <h2>
+            <課題>
+        </h2>
+        <div class="tab-panel">
+            <!--タブ-->
+            <ul class="tab-group">
+                <li class="tab tab-A is-active">Lesson1</li>
+                <li class="tab tab-B">Lesson2</li>
+                <li class="tab tab-C">Lesson3</li>
+                <li class="tab tab-D">Lesson4</li>
+                <li class="tab tab-E">Lesson5</li>
+                <li class="tab tab-F">Lesson6</li>
+                <li class="tab tab-G">Lesson7</li>
+                <li class="tab tab-H">Lesson8</li>
+                <li class="tab tab-I">Lesson9</li>
+                <li class="tab tab-J">Lesson10</li>
+                <li class="tab tab-K">Lesson11</li>
+                <li class="tab tab-L">Lesson12</li>
+                <li class="tab tab-M">Lesson13</li>
+                <li class="tab tab-N">Lesson14</li>
+                <li class="tab tab-O">Lesson15</li>
+                <li class="tab tab-P">Lesson16</li>
+                <li class="tab tab-Q">Lesson17</li>
+                <li class="tab tab-R">Lesson18</li>
+                <li class="tab tab-S">Lesson19</li>
+                <li class="tab tab-T">Lesson20</li>
+            </ul>
+
+            <!--タブを切り替えて表示するコンテンツ-->
+            <div class="panel-group">
+                <div class="panel tab-A is-show">＜特に苦労したこと＞
+                    <p>・VSCodeのフォルダ階層がよくわからなくなり、数日間おかしなままで作業した</p>
+                </div>
+                <div class="panel tab-B">＜特に苦労したこと＞</div>
+                <div class="panel tab-C">＜特に苦労したこと＞</div>
+                <div class="panel tab-D">＜特に苦労したこと＞</div>
+                <div class="panel tab-E">＜特に苦労したこと＞</div>
+                <div class="panel tab-F">＜特に苦労したこと＞</div>
+                <div class="panel tab-G">＜特に苦労したこと＞</div>
+                <div class="panel tab-H">＜特に苦労したこと＞</div>
+                <div class="panel tab-I">＜特に苦労したこと＞
+                    <p>配列のconst of array の配列から値を取り出すときに、[]ではなく()で打ち込んでおり、この時は何か他に悪いことがないかメチャクチャ調べまくった！！</p>
+                </div>
+                <div class="panel tab-J">＜特に苦労したこと＞
+                    <p><span> in objectとconst of
+                            のループ時に</span>、どのようにオブジェクトの値にアクセスすれば良いのか、混乱した!! console.logを1か所ずつ仕掛ける方法が良さそうだとわかったものの,
+                        <span>SCOPEの概念</span> がわかっておらず、<span>に何も表示されず</span>それを理解するのにもメチャクチャ時間が。。。
+                    </p>
+                </div>
+                <div class="panel tab-K">＜特に苦労したこと＞</div>
+                <div class="panel tab-L">＜特に苦労したこと＞</div>
+                <div class="panel tab-M">＜特に苦労したこと＞</div>
+                <div class="panel tab-M">＜特に苦労したこと＞</div>
+                <div class="panel tab-O">＜特に苦労したこと＞</div>
+                <div class="panel tab-P">＜特に苦労したこと＞</div>
+                <div class="panel tab-Q">＜特に苦労したこと＞</div>
+                <div class="panel tab-R">＜特に苦労したこと＞</div>
+                <div class="panel tab-S">＜特に苦労したこと＞</div>
+                <div class="panel tab-T">＜特に苦労したこと＞</div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="third-wrapper">
+        <!--P3相当-->
+
+        <p class="tomyself">＜成長の軌跡＞
+        <p class="p1">・わからない事について、考えてもわからなければ、さっと手を動かして自分のできることを駆使してトライ&エラーをする事がCODEの世界において有効だなと気付けた</p>
+        <P class="p2">・会社の教育として、成長レベルの期待値は意識しつつも、できない事に目を向けるではなく、できた事の差分を意識する事が大事！！</P>
+        <p class="p3">・悩んで悩んで、色々調べて、やれる事試して最終的に、Yey Passedのメッセージを見た時の<span>アドレナリンの放出を実感し笑　モノづくりとの共通点を見出してはまった！！</span>
+        </p>
+        </p>
+        <p class="toclass">
+            <8期のメンバーに向けて>
+        </p>
+        <p class="p4">・０からはじめた仲間として<span>本当に刺激</span>をたくさん受けました！ありがとうございます！！</p>
+
+        <p class="tocoach">
+            <講師の方々へ>
+        </p>
+        <p class="p5">・どんなコメントでも受け止めてくれてありがとうございます！<span>インポスター症候群には気をつけろですねｗ</span></p>
+
+    </div>
+
+    </div>
+
+
+    </div>
+
+
+    <div class="footer">
+        <h3>今日が残りの人生で一番若い日！前進あるのみっ</h3>
+        <!-- <a>Gmail-adress</a> -->
+        <div class="footer-logo"></div>
+        <div class="footer-list">
+            <ul>
+
+                <a href="www.facebook.com/77satoshi77">Facebook</a>
+                <!-- <a>mail</a>
+        <a>line</a> -->
+            </ul>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
