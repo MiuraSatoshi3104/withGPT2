@@ -489,19 +489,18 @@
     }, gameState.speed);
 
 	  
-	  
-	  
-	  
-	  
-	  
-	  
-//----------------------------------------------
-X = Math.floor(10 / 2) - Math.floor(gameState.currentBlock.shape[0] / 2);
-gameState.currentX = X;
-gameState.currentY = 0;
+	  gameState.currentBlock = getRandomBlock();
+
+// ブロックを描画する位置を計算する
+var x = Math.floor(gameState.grid[0].length / 2) - Math.floor(gameState.currentBlock.shape[0] / 2);
+var y = 0;
+
+// ゲーム状態を初期化する
+gameState.currentX = x;
+gameState.currentY = y;
 gameState.score = 0;
 gameState.gameOver = false;
-	//---------------------------
+
 	  
 	      // キーボードイベントを設定する
     document.addEventListener("keydown", handleKeyDown);
