@@ -472,9 +472,29 @@
       gameState.grid[i] = new Array(10).fill(null);
     }
 
-    // ゲームを開始する
+
+	  // ゲームを開始する
     gameState.currentBlock = getRandomBlock();
-    gameState.current
+    gameState.currentBlock.column = Math.floor(gameState.grid[0].length / 2);
+    gameState.currentBlock.row = 0;
+    if (checkCollision(gameState.currentBlock)) {
+      gameOver();
+      return;
+    }
+
+    // ゲームループを開始する
+    gameState.intervalId = setInterval(function () {
+      update();
+      draw();
+    }, gameState.speed);
+
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 //----------------------------------------------
 X = Math.floor(10 / 2) - Math.floor(gameState.currentBlock.shape[0] / 2);
 gameState.currentX = X;
