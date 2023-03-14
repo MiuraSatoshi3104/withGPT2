@@ -5,6 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <head>
+	<title>My Page</title>
+	<style>
+		body {
+			background-color: black;
+			background-image: url("");
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+		}
+		input[type="text"] {
+			font-size: 24px;
+			padding: 8px;
+			margin: 8px;
+			border-radius: 8px;
+			border: none;
+			outline: none;
+			background-color: white;
+			color: black;
+			width: 60%;
+			max-width: 600px;
+		}
+		button {
+			font-size: 24px;
+			padding: 8px;
+			margin: 8px;
+			border-radius: 8px;
+			border: none;
+			outline: none;
+			background-color: green;
+			color: white;
+		}
+	</style>
   </head>
   <body>
     <header>
@@ -29,5 +68,23 @@
       <p>Copyright © 2023 あなたのウェブサイトの名前</p>
     </footer>
     <script src="script.js"></script>
+    
+    	<div class="container">
+		<input type="text" id="text-input" placeholder="Enter your text here">
+		<button id="send-button">Send</button>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#send-button').click(function() {
+				var text = $('#text-input').val();
+				var url = 'https://api.midjourney.com/image?text=' + text;
+				$.get(url, function(data) {
+					$('body').css('background-image', 'url(' + data + ')');
+				});
+			});
+		});
+	</script>
+    
   </body>
 </html>
