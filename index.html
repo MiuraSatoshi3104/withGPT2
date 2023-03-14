@@ -11,6 +11,7 @@
     <title>My Page</title>
     <title>Tetris</title>
     <title>Tetris Game</title>
+    <canvas id="canvas" width="240" height="480"></canvas>
     <script src="js/tetris.js"></script>
     <style>
         /* ゲームボードのスタイル */
@@ -251,6 +252,10 @@
                     });
                 });
             });
+            
+            var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+
         </script>
 
         <script>
