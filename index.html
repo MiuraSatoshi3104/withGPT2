@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
    
 	<title>My Page</title>
+	    <title>Tetris</title>
 	<style>
 		body {
 			background-color: black;
@@ -53,7 +54,9 @@
 		box-shadow: none;
 		transform: translateY(2px);
 	}
-
+   #canvas {
+        border: 2px solid black;
+      }
 
 	</style>
   </head>
@@ -61,6 +64,7 @@
     <header>
       <h1>あなたのウェブサイトのタイトル</h1>
     </header>
+	    <canvas id="canvas" width="240" height="400"></canvas>
     <nav>
       <ul>
         <li><a href="#">ホーム</a></li>
@@ -98,5 +102,568 @@
 		});
 	</script>
     
+    <script>
+      // ゲームの状態を保持する変数
+      var gameState = {
+        score: 0,
+        level: 1,
+        gameOver: false,
+        paused: false,
+        grid: [],
+        currentPiece: null,
+        nextPiece: null,
+      };
+
+      // テトリスのブロック種類
+      var blockTypes = [
+        {
+          color: "cyan",
+          shape: [
+            [0, 0, 0, 0],
+            [1, 1, 1, 1],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+          ],
+        },
+        {
+          color: "yellow",
+          shape: [
+            [0, 0, 0, 0],
+            [0, 1, 1, 0],
+            [0, 1, 1, 0],
+            [0, 0, 0, 0],
+          ],
+        },
+        {
+          color: "purple",
+          shape: [
+            [0, 0, 0, 0],
+            [0, 1, 1, 0],
+            [1, 1, 0, 0],
+            [0, 0, 0, 0],
+          ],
+        },
+        {
+          color: "green",
+          shape: [
+            [0, 0, 0, 0],
+            [0, 1, 1, 0],
+            [0, 0, 1, 1],
+            [0, 0, 0, 0],
+          ],
+        },
+        {
+          color: "red",
+          shape: [
+            [0, 0, 0, 0],
+            [0, 1, 1, 0],
+            [0, 1, 0, 0],
+            [0, 1, 0, 0],
+          ],
+        },
+        {
+          color: "blue",
+          shape: [
+            [0, 0, 0, 0],
+            [1, 1, 0, 0],
+            [0, 1, 1, 0],
+            [0, 0, 0, 0],
+          ],
+        },
+        {
+          color: "orange",
+          shape: [
+            [0, 0, 0, 0],
+            [0, 1, 1, 0],
+            [1, 1, 0, 0],
+            [0, 0, 0, 0],
+          ],
+        },
+      ];
+
+      // テトリスのブロッククラス
+      class Block {
+        constructor(type) {
+          this.type = type;
+          this.color = type.color;
+          this.shape = type.shape;
+          this.x = Math.floor((10 - this.shape[0].length) / 2);
+          this.y = -this
+	        this.rotation = 0;
+    }
+
+    // ブロックを回転させる
+    rotate() {
+      var rotated = [];
+      for (var i = 0; i < this.shape[0].length; i++) {
+        rotated.push([]);
+        for (var j = this.shape.length - 1; j >= 0; j--) {
+          rotated[i].push(this.shape[j][i]);
+        }
+      }
+      this.shape = rotated;
+      this.rotation = (this.rotation + 1) % 4;
+    }
+
+    // ブロックを移動する
+    move(dx, dy) {
+      this.x += dx;
+      this.y += dy;
+    }
+
+    // ブロックを下に移動する
+    moveDown() {
+      this.move(0, 1);
+    }
+
+    // ブロックを左に移動する
+    moveLeft() {
+      this.move(-1, 0);
+    }
+
+    // ブロックを右に移動する
+    moveRight() {
+      this.move(1, 0);
+    }
+  }
+
+  // ゲームの初期化
+  function initGame() {
+    // ゲーム状態を初期化
+    gameState.score = 0;
+    gameState.level = 1;
+    gameState.gameOver = false;
+    gameState.paused = false;
+    gameState.grid = [];
+    for (var i = 0; i < 20; i++) {
+      gameState.grid.push(new Array(10).fill(null));
+    }
+
+    // 最初のブロックを生成
+    gameState.currentPiece = getRandomBlock();
+    gameState.nextPiece = getRandomBlock();
+
+    // ゲームループを開始
+    setInterval(gameLoop, 500);
+  }
+
+  // ゲームループ
+  function gameLoop() {
+    if (!gameState.paused) {
+      // ブロックを1マス下に移動
+      gameState.currentPiece.moveDown();
+
+      // 衝突判定
+      if (isCollision(gameState.currentPiece)) {
+        // ブロックを戻す
+        gameState.currentPiece.move(0, -1);
+
+        // ブロックを固定する
+        for (var i = 0; i < gameState.currentPiece.shape.length; i++) {
+          for (var j = 0; j < gameState.currentPiece.shape[0].length; j++) {
+            if (gameState.currentPiece.shape[i][j] !== 0) {
+              gameState.grid[gameState.currentPiece.y + i][gameState.currentPiece.x + j] =
+                gameState.currentPiece.color;
+            }
+          }
+        }
+
+        // 消去判定
+        var linesCleared = clearLines();
+        if (linesCleared > 0) {
+          // スコアを加算
+          gameState.score += 100 * linesCleared;
+
+          // レベルアップ判定
+          if (gameState.score >= gameState.level * 1000) {
+            gameState.level++;
+          }
+        }
+
+        // 次のブロックを生成
+        gameState.currentPiece = gameState.nextPiece;
+        gameState.nextPiece = getRandomBlock();
+
+        // ゲームオーバー判定
+        if (isCollision(gameState.currentPiece)) {
+          gameState.gameOver = true;
+          alert("Game over!");
+        }
+      }
+    }
+
+    // ゲーム画面を描画
+    drawGame();
+  }
+
+  // ランダムなブロック
+	  function getRandomBlock() {
+    var blocks = [      [        [1, 1],
+        [1, 1],
+      ], // 四角形ブロック
+      [        [1, 0, 0],
+        [1, 1, 1],
+      ], // L字型ブロック
+      [        [0, 0, 1],
+        [1, 1, 1],
+      ], // J字型ブロック
+      [        [0, 1, 1],
+        [1, 1, 0],
+      ], // S字型ブロック
+      [        [1, 1, 0],
+        [0, 1, 1],
+      ], // Z字型ブロック
+      [        [1, 1, 1],
+        [0, 1, 0],
+      ], // T字型ブロック
+      [        [0, 1, 0, 0],
+        [0, 1, 0, 0],
+        [0, 1, 0, 0],
+        [0, 1, 0, 0],
+      ], // I字型ブロック
+    ];
+    var colors = ["red", "orange", "yellow", "green", "blue", "purple", "pink"];
+    var index = Math.floor(Math.random() * blocks.length);
+    var block = new Block(blocks[index], colors[index]);
+    return block;
+  }
+
+  // 衝突判定
+  function isCollision(piece) {
+    for (var i = 0; i < piece.shape.length; i++) {
+      for (var j = 0; j < piece.shape[0].length; j++) {
+        if (
+          piece.shape[i][j] !== 0 &&
+          (piece.y + i >= 20 ||
+            piece.x + j < 0 ||
+            piece.x + j >= 10 ||
+            gameState.grid[piece.y + i][piece.x + j] !== null)
+        ) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  // 行を消去する
+  function clearLine(row) {
+    // 行を削除
+    gameState.grid.splice(row, 1);
+
+    // 新しい行を追加
+    gameState.grid.unshift(new Array(10).fill(null));
+  }
+
+  // ブロックを描画する
+  function drawBlock(ctx, piece, x, y) {
+    for (var i = 0; i < piece.shape.length; i++) {
+      for (var j = 0; j < piece.shape[0].length; j++) {
+        if (piece.shape[i][j] !== 0) {
+          ctx.fillStyle = piece.color;
+          ctx.fillRect(x + j, y + i, 1, 1);
+          ctx.strokeStyle = "white";
+          ctx.strokeRect(x + j, y + i, 1, 1);
+        }
+      }
+    }
+  }
+
+  // ゲーム画面を描画する
+  function drawGame() {
+    // キャンバスをクリア
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // 背景を描画
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // ゲームオーバーの場合はメッセージを描画
+    if (gameState.gameOver) {
+      ctx.fillStyle = "white
+      ctx.font = "30px Arial";
+      ctx.fillStyle = "red";
+      ctx.textAlign = "center";
+      ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
+      return;
+    }
+
+    // ブロックを描画
+    drawBlock(ctx, gameState.currentBlock, gameState.currentX, gameState.currentY);
+
+    // ゲーム盤を描画
+    for (var i = 0; i < gameState.grid.length; i++) {
+      for (var j = 0; j < gameState.grid[0].length; j++) {
+        if (gameState.grid[i][j] !== null) {
+          ctx.fillStyle = gameState.grid[i][j];
+          ctx.fillRect(j, i, 1, 1);
+          ctx.strokeStyle = "white";
+          ctx.strokeRect(j, i, 1, 1);
+        }
+      }
+    }
+
+    // スコアを描画
+    ctx.font = "20px Arial";
+    ctx.fillStyle = "white";
+    ctx.textAlign = "left";
+    ctx.fillText("Score: " + gameState.score, 10, 20);
+  }
+
+  // ブロックを固定する
+  function fixBlock() {
+    for (var i = 0; i < gameState.currentBlock.shape.length; i++) {
+      for (var j = 0; j < gameState.currentBlock.shape[0].length; j++) {
+        if (gameState.currentBlock.shape[i][j] !== 0) {
+          gameState.grid[gameState.currentY + i][gameState.currentX + j] =
+            gameState.currentBlock.color;
+        }
+      }
+    }
+
+    // 行が揃っているか調べる
+    var rowCount = 0;
+    for (var i = 0; i < gameState.grid.length; i++) {
+      if (gameState.grid[i].every((cell) => cell !== null)) {
+        clearLine(i);
+        rowCount++;
+      }
+    }
+
+    // スコアを更新する
+    if (rowCount > 0) {
+      gameState.score += rowCount * 100;
+    }
+
+    // 新しいブロックを生成する
+    gameState.currentBlock = getRandomBlock();
+    gameState.currentX = Math.floor(10 / 2) - Math.floor(gameState.currentBlock.shape[0] / 2);
+    gameState.currentY = 0;
+
+    // 衝突している場合はゲームオーバー
+    if (isCollision(gameState.currentBlock)) {
+      gameState.gameOver = true;
+    }
+  }
+
+  // ゲームループ
+  function gameLoop() {
+    // ブロックを下に移動する
+    gameState.currentY++;
+
+    // 衝突している場合はブロックを固定する
+    if (isCollision(gameState.currentBlock)) {
+      gameState.currentY--;
+      fixBlock();
+    }
+
+    // ゲームを描画する
+    drawGame();
+
+    // 次のフレームを実行する
+    requestAnimationFrame(gameLoop);
+  }
+
+  // ゲームを初期化する
+  function init() {
+    // ゲーム盤を初期化する
+    gameState.grid = new Array(20);
+    for (var i = 0; i < gameState.grid.length; i++) {
+      gameState.grid[i] = new Array(10).fill(null);
+    }
+
+    // ゲームを開始する
+    gameState.currentBlock = getRandomBlock();
+    gameState.current
+//----------------------------------------------
+X = Math.floor(10 / 2) - Math.floor(gameState.currentBlock.shape[0] / 2);
+gameState.currentX = X;
+gameState.currentY = 0;
+gameState.score = 0;
+gameState.gameOver = false;
+	//---------------------------
+	  
+	      // キーボードイベントを設定する
+    document.addEventListener("keydown", handleKeyDown);
+
+    // ゲームループを開始する
+    gameLoop();
+  }
+
+  // キーボードイベントを処理する
+  function handleKeyDown(event) {
+    switch (event.keyCode) {
+      case 37: // 左
+        gameState.currentX--;
+        if (isCollision(gameState.currentBlock)) {
+          gameState.currentX++;
+        }
+        break;
+      case 38: // 上
+        gameState.currentBlock = rotateBlock(gameState.currentBlock);
+        if (isCollision(gameState.currentBlock)) {
+          gameState.currentBlock = rotateBlock(gameState.currentBlock, -1);
+        }
+        break;
+      case 39: // 右
+        gameState.currentX++;
+        if (isCollision(gameState.currentBlock)) {
+          gameState.currentX--;
+        }
+        break;
+      case 40: // 下
+        gameState.currentY++;
+        if (isCollision(gameState.currentBlock)) {
+          gameState.currentY--;
+          fixBlock();
+        }
+        break;
+    }
+  }
+
+  // ブロックを回転する
+  function rotateBlock(block, direction = 1) {
+    var newBlock = [];
+    for (var i = 0; i < block.shape[0].length; i++) {
+      newBlock.push(new Array(block.shape.length).fill(0));
+    }
+    for (var i = 0; i < block.shape.length; i++) {
+      for (var j = 0; j < block.shape[0].length; j++) {
+        if (direction === 1) {
+          newBlock[j][block.shape.length - i - 1] = block.shape[i][j];
+        } else {
+          newBlock[block.shape.length - j - 1][i] = block.shape[i][j];
+        }
+      }
+    }
+    return { shape: newBlock, color: block.color };
+  }
+
+  // ブロックが衝突しているか調べる
+  function isCollision(block) {
+    for (var i = 0; i < block.shape.length; i++) {
+      for (var j = 0; j < block.shape[0].length; j++) {
+        if (
+          block.shape[i][j] !== 0 &&
+          (gameState.currentY + i >= gameState.grid.length ||
+            gameState.currentX + j < 0 ||
+            gameState.currentX + j >= gameState.grid[0].length ||
+            gameState.grid[gameState.currentY + i][gameState.currentX + j] !== null)
+        ) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  // ランダムなブロックを生成する
+  function getRandomBlock() {
+    var blocks = [      { shape: [[1, 1], [1, 1]], color: "cyan" },
+      { shape: [[0, 2, 0], [2, 2, 2]], color: "blue" },
+      { shape: [[3, 3, 0], [0, 3, 3]], color: "orange" },
+      { shape: [[4, 4, 4], [0, 4, 0]], color: "yellow" },
+      { shape: [[5, 0, 0], [5, 5, 5]], color: "green" },
+      { shape: [[0, 0, 6], [6, 6, 6]], color: "purple" },
+      { shape: [[7, 7, 7, 7]], color: "red" },
+    ];
+    var block = blocks[Math.floor(Math.random() * blocks.length)];
+    return block;
+  }
+
+  // ブロックを固定する
+  function fixBlock() {
+    for (var i = 0; i < gameState.currentBlock.shape.length; i++) {
+      for (var j = 0; j < gameState.currentBlock.shape[0].length; j++) {
+        if (gameState.currentBlock.shape[i][j] !== 0) {
+          gameState.grid[gameState.currentY + i][gameState.currentX + j] = gameState.currentBlock.color;
+        }
+      }
+    }
+    removeLines();
+    gameState.currentBlock = getRandomBlock();
+    var X = Math.floor(10 / 2) - Math.floor(gameState.currentBlock.shape[0] / 2);
+    gameState.currentX = X;
+    gameState.currentY = 0;
+    if (isCollision(gameState.currentBlock)) {
+      gameState.gameOver = true;
+    }
+  }
+
+  // 揃ったラインを消す
+  function removeLines() {
+    var lines = 0;
+    for (var i = gameState.grid.length - 1; i >= 0; i--) {
+      var rowFilled = true;
+      for (var j = 0; j < gameState.grid[i].length; j++) {
+        if (gameState.grid[i][j] === null) {
+          rowFilled = false;
+          break;
+        }
+      }
+      if (rowFilled) {
+        lines++;
+        for (var y = i; y > 0; y--) {
+          for (var x = 0; x < gameState.grid[y].length; x++) {
+            gameState.grid[y][x] = gameState.grid[y - 1][x];
+          }
+        }
+        for (var x = 0; x < gameState.grid[0].length; x++) {
+          gameState.grid[0][x] = null;
+        }
+        i++;
+      }
+    }
+    switch (lines) {
+      case 1:
+        gameState.score += 40;
+        break;
+      case 2:
+        gameState.score += 100;
+        break;
+      case 3:
+        gameState.score += 300;
+        break;
+      case 4:
+        gameState.score += 1200;
+        break;
+    }
+  }
+
+  // ゲームループを実行する
+  function gameLoop() {
+    // ゲームオーバーの場合は終了する
+    if (gameState.gameOver) {
+      alert("ゲームオーバー\nスコア: " + gameState.score);
+      return;
+    }
+
+    // ブロックを落とす
+    gameState.currentY++;
+    if (isCollision(gameState.currentBlock)) {
+      gameState.currentY--;
+      fixBlock();
+    }
+
+    // 背景を描画する
+    context.fillStyle = "#000000";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    // グリッドを描画する
+    for (var i = 0; i < gameState.grid.length; i++) {
+      for (var j = 0; j < gameState.grid[0].length; j++) {
+        if (gameState.grid[i][j] !== 0) {
+          ctx.fillStyle = colors[gameState.grid[i][j] - 1];
+          ctx.fillRect(j * blockSize, i * blockSize, blockSize, blockSize);
+
+          ctx.strokeStyle = "rgba(0, 0, 0, 0.1)";
+          ctx.strokeRect(j * blockSize, i * blockSize, blockSize, blockSize);
+        }
+      }
+    }
+
+	  
+	  
+	  
   </body>
 </html>
