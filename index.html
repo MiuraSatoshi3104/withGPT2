@@ -11,8 +11,8 @@
     <title>My Page</title>
     <title>Tetris</title>
     <title>Tetris Game</title>
-    <canvas id="canvas" width="240" height="480"></canvas>
     <script src="js/tetris.js"></script>
+    <canvas id="canvas" width="240" height="480"></canvas>
     <style>
         /* ゲームボードのスタイル */
         #game-board {
@@ -252,10 +252,6 @@
                     });
                 });
             });
-            
-            var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
-
         </script>
 
         <script>
@@ -836,6 +832,78 @@ var ctx = canvas.getContext("2d");
                     }
                 }
             }
+
+            function update() {
+                // ブロックを落とす処理
+                if (counter % (fps / speed) == 0) {
+                    if (valid(0, 1)) {
+                        ++currentY;
+                    } else {
+                        freeze();
+                        clearLines();
+                        if (lose) {
+                            alert("GAME OVER");
+                            clearInterval(interval);
+                            return;
+                        }
+                        newShape();
+                    }
+                }
+                counter++;
+                draw();
+            }
+
+            document.addEventListener("keydown", function (event) {
+                if (event.keyCode == 37) {
+                    if (valid(-1)) {
+                        --currentX;
+                    }
+                } else if (event.keyCode == 39) {
+                    if (valid(1)) {
+                        ++currentX;
+                    }
+                } else if (event.keyCode == 40) {
+                    if (valid(0, 1)) {
+                        ++currentY;
+                    }
+                } else if (event.keyCode == 38) {
+                    let rotated = rotate(current);
+                    if (valid(0, 0, rotated)) {
+                        current = rotated;
+                    }
+                }
+            });
+
+            newShape();
+            var interval = setInterval(update, 1000 / fps);
+
+
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+
+
+
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = "#000000";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.strokeStyle = "#FFFFFF";
+                for (var x = 0; x < 10; ++x) {
+                    for (var y = 0; y < 20; ++y) {
+                        if (board[y][x]) {
+                            drawBlock(x, y, board[y][x]);
+                        }
+                    }
+                }
+                for (var i = 0; i < current.length; ++i) {
+                    drawBlock(currentX + current[i][0], currentY + current[i][1], current.color);
+                }
+            }
+
+
+
+
         </script>
     </body>
 </body>
