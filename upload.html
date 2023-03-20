@@ -19,8 +19,10 @@
 
   <main>
     <h1>写真アップロード</h1>
-      <input type="file" name="uploaded_file" id="file-upload" accept="image/*">
-      <button onclick="uploadimage()">アップロード</button>
+    <!-- フォームタグを削除し、ボタンにuploadImage関数を紐付ける -->
+    <label for="file-upload">写真を選択してください:</label>
+    <input type="file" name="uploaded_file" id="file-upload" accept="image/*">
+    <button type="button" onclick="uploadImage()">アップロード</button>
     </form>
   </main>
 
