@@ -24,3 +24,18 @@ body {
   border: 2px solid #333; /* スクリーン部分の境界を確認できるようにするために一時的に追加 */
   overflow: hidden;
 }
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 1rem;
+  z-index: 100;
+}
+
+nav a {
+  margin-right: 1rem;
+  color: #333;
+  text-decoration: none;
+}
