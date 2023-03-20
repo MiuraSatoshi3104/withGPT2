@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  background-image: url("smartphone.jpeg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.smartphone {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.screen {
+  position: absolute;
+  top: 15%; /* スマホ画像のスクリーン部分の位置に合わせて調整 */
+  left: 10%; /* スマホ画像のスクリーン部分の位置に合わせて調整 */
+  width: 80%; /* スマホ画像のスクリーン部分のサイズに合わせて調整 */
+  height: 70%; /* スマホ画像のスクリーン部分のサイズに合わせて調整 */
+  border: 2px solid #333; /* スクリーン部分の境界を確認できるようにするために一時的に追加 */
+  overflow: hidden;
+}
