@@ -22,7 +22,7 @@ body {
   width: 80%; /* スマホ画像のスクリーン部分のサイズに合わせて調整 */
   height: 70%; /* スマホ画像のスクリーン部分のサイズに合わせて調整 */
 /*   border: 2px solid #333; /* スクリーン部分の境界を確認できるようにするために一時的に追加 */
-  overflow: hidden; */
+  overflow: hidden; 
 }
 header {
   position: absolute;
