@@ -2,12 +2,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const smartphoneScreen = document.getElementById("smartphoneScreen");
   const storedImage = localStorage.getItem("uploadedImage");
   if (storedImage) {
-    const imageContainer = document.createElement("div");
-    imageContainer.className = "image-container";
     const img = document.createElement("img");
     img.src = storedImage;
-    imageContainer.appendChild(img);
-    smartphoneScreen.appendChild(imageContainer);
+    img.classList.add("uploaded-image");
+    smartphoneScreen.appendChild(img);
   }
 });
 
