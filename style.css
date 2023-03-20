@@ -33,7 +33,7 @@ body {
 }
 
 .screen {
-  position: absolute;
+  position: relative;
   top: 15%;
   /* スマホ画像のスクリーン部分の位置に合わせて調整 */
   left: 10%;
