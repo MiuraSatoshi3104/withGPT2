@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
     img.src = storedImage;
     img.classList.add("uploaded-image");
     smartphoneScreen.appendChild(img);
+  } else {
+    localStorage.removeItem("uploadedImage");
   }
 });
 
