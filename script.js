@@ -19,8 +19,8 @@ for (let i = 1; i <= imageCount; i++) {
   images.push(`image${i}.jpg`);
 }
 
-function loadImage() {
-  const image = images[currentImage];
+function loadImage(imageno) {
+  const image = images[imageno - 1];
   const img = document.createElement("img");
   img.src = image;
   img.classList.add("uploaded-image");
@@ -29,7 +29,7 @@ function loadImage() {
   smartphoneScreen.appendChild(img);
 }
 
-loadImage();
+loadImage(1);
 
 function uploadImage() {
   const input = document.getElementById("file-upload");
@@ -46,9 +46,9 @@ function uploadImage() {
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowRight") {
     currentImage = (currentImage + 1) % images.length;
-    loadImage();
+    loadImage(currentImage + 1);
   } else if (event.key === "ArrowLeft") {
     currentImage = (currentImage - 1 + images.length) % images.length;
-    loadImage();
+    loadImage(currentImage + 1);
   }
 });
