@@ -52,3 +52,27 @@ document.addEventListener("keydown", (event) => {
     loadImage(currentImage + 1);
   }
 });
+
+function loadImageRoll() {
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = "image/*";
+  input.onchange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.match(/^image\/(png|jpeg)$/)) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = document.createElement("img");
+        img.src = e.target.result;
+        img.classList.add("uploaded-image");
+        const smartphoneScreen = document.getElementById("smartphoneScreen");
+        smartphoneScreen.innerHTML = "";
+        smartphoneScreen.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      alert("ファイルを選択してください（PNGまたはJPEG）");
+    }
+  };
+  input.click();
+}
