@@ -1,58 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const smartphoneScreen = document.getElementById("smartphoneScreen");
-  const storedImage = localStorage.getItem("uploadedImage");
-  if (storedImage) {
-    const img = document.createElement("img");
-    img.src = storedImage;
-    img.classList.add("uploaded-image");
-    smartphoneScreen.appendChild(img);
-  } else {
-    localStorage.removeItem("uploadedImage");
-  }
-});
-
-let currentImage = 0;
-const images = [];
-const imageCount = 3;
-
-for (let i = 1; i <= imageCount; i++) {
-  images.push(`image${i}.jpg`);
-}
-
-function loadImage(imageno) {
-  const image = images[imageno - 1];
-  const img = document.createElement("img");
-  img.src = image;
-  img.classList.add("uploaded-image");
-  const smartphoneScreen = document.getElementById("smartphoneScreen");
-  smartphoneScreen.innerHTML = "";
-  smartphoneScreen.appendChild(img);
-}
-
-loadImage(1);
-
-function uploadImage() {
-  const input = document.getElementById("file-upload");
-  if (input.files && input.files[0]) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      localStorage.setItem("uploadedImage", e.target.result);
-      window.location.href = "index.html";
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
-}
-
-document.addEventListener("keydown", (event) => {
-  if (event.key === "ArrowRight") {
-    currentImage = (currentImage + 1) % images.length;
-    loadImage(currentImage + 1);
-  } else if (event.key === "ArrowLeft") {
-    currentImage = (currentImage - 1 + images.length) % images.length;
-    loadImage(currentImage + 1);
-  }
-});
-
 function loadImageRoll() {
   const input = document.createElement("input");
   input.type = "file";
@@ -98,4 +43,16 @@ function loadImageRoll() {
     }
   };
   input.click();
+
+  const smartphoneScreen = document.getElementById("smartphoneScreen");
+  const screenHeight = smartphoneScreen.clientHeight;
+  const scrollDuration = 7000; // スクロールする時間（7秒）
+  let startTime = null;
+  let imgHeight = null;
+  const img = smartphoneScreen.querySelector("img");
+  if (img) {
+    imgHeight = img.clientHeight;
+    window.requestAnimationFrame(step);
+  }
 }
+
