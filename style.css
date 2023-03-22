@@ -8,14 +8,11 @@
   }
   
   body {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
   }
   
   /* ヘッダー */
   header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     padding: 1rem;
   }
   
@@ -38,3 +35,34 @@
     animation: fadeIn 1s;
   }
   
+  /* Header */
+  header {
+    background-color: #f3f3f3;
+    padding: 2rem 1rem;
+  }
+  
+  header h1 {
+    font-size: 2rem;
+  }
+  
+  /* Main content */
+  main section {
+    margin-bottom: 2rem;
+  }
+  
+  /* Footer */
+  footer {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  .fade-in {
+    opacity: 0;
+  }
+  
+  .visible {
+    opacity: 1;
+    animation: fadeIn 1s;
+  }
+    
