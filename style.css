@@ -1,4 +1,3 @@
-
 body {
   margin: 0;
   background-image: url("smartphone.jpg");
@@ -9,7 +8,6 @@ body {
   justify-content: center;
   align-items: center;
 }
-
 
 .smartphone {
   position: relative;
@@ -57,27 +55,16 @@ nav a {
   text-decoration: none;
 }
 
-.image-container {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#loadButton {
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.image-container img {
-  width: 100%;
-  height: auto;
-  max-height: 100%;
-  object-fit: contain;
+#loadButton:hover {
+  background-color: #005b82;
 }
-.uploaded-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
