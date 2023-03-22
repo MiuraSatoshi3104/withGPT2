@@ -68,6 +68,29 @@ function loadImageRoll() {
         const smartphoneScreen = document.getElementById("smartphoneScreen");
         smartphoneScreen.innerHTML = "";
         smartphoneScreen.appendChild(img);
+        // 画像読み込み後にスクロール処理を追加
+        const screenHeight = smartphoneScreen.clientHeight;
+        const imgHeight = img.clientHeight;
+        const scrollDuration = 7000; // スクロールする時間（7秒）
+        let startTime = null;
+        const step = (timestamp) => {
+          if (!startTime) startTime = timestamp;
+          const timeElapsed = timestamp - startTime;
+          const distance = (imgHeight - screenHeight) / 2;
+          const scrollAmount = distance * (timeElapsed / scrollDuration);
+          smartphoneScreen.scrollTo(0, scrollAmount);
+          if (scrollAmount < distance) {
+            window.requestAnimationFrame(step);
+          } else {
+            startTime = null;
+            smartphoneScreen.scrollTo(0, distance);
+            window.requestAnimationFrame(() => {
+              smartphoneScreen.innerHTML = "";
+              loadImage(1);
+            });
+          }
+        };
+        window.requestAnimationFrame(step);
       };
       reader.readAsDataURL(file);
     } else {
