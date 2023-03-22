@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
   background-image: url("smartphone.jpg");
   background-size: cover;
@@ -71,4 +71,52 @@ nav a {
 
 #loadRollButton:hover {
   background-color: #005b82;
+}
+ */
+
+body {
+    background-color: white;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.phone-screen {
+    width: 50%;
+    height: 50%;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+#image-preview {
+    max-width: 100%;
+    max-height: 100%;
+    display: none;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+}
+
+.animation-area {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 45%;
+    height: 100%;
+    overflow: hidden;
 }
