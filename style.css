@@ -55,7 +55,7 @@ nav a {
   text-decoration: none;
 }
 
-#loadButton {
+#loadRollButton {
   background-color: #008CBA;
   color: white;
   border: none;
@@ -63,8 +63,12 @@ nav a {
   border-radius: 2rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-#loadButton:hover {
+#loadRollButton:hover {
   background-color: #005b82;
 }
