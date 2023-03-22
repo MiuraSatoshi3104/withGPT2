@@ -84,10 +84,10 @@ function loadImageRoll() {
           } else {
             startTime = null;
             smartphoneScreen.scrollTo(0, distance);
-            window.requestAnimationFrame(() => {
+            window.setTimeout(() => {
               smartphoneScreen.innerHTML = "";
               loadImage(1);
-            });
+            }, 2000); // 2秒待機する
           }
         };
         window.requestAnimationFrame(step);
