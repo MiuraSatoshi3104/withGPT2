@@ -1,3 +1,7 @@
+const screenHeight = window.innerHeight;
+const scrollDuration = 7000; // スクロールする時間（7秒）
+let startTime = null;
+
 function loadImageRoll() {
   const input = document.createElement("input");
   input.type = "file";
@@ -13,16 +17,17 @@ function loadImageRoll() {
         const smartphoneScreen = document.getElementById("smartphoneScreen");
         smartphoneScreen.innerHTML = "";
         smartphoneScreen.appendChild(img);
-        // 画像読み込み後にスクロール処理を追加
-        const screenHeight = smartphoneScreen.clientHeight;
+
+        let scrollAmount = 0;
+        let distance = 0;
         const imgHeight = img.clientHeight;
-        const scrollDuration = 7000; // スクロールする時間（7秒）
-        let startTime = null;
+        if (imgHeight > screenHeight) {
+          distance = imgHeight - screenHeight;
+        }
         const step = (timestamp) => {
           if (!startTime) startTime = timestamp;
           const timeElapsed = timestamp - startTime;
-          const distance = (imgHeight - screenHeight) / 2;
-          const scrollAmount = distance * (timeElapsed / scrollDuration);
+          scrollAmount = distance * (timeElapsed / scrollDuration);
           smartphoneScreen.scrollTo(0, scrollAmount);
           if (scrollAmount < distance) {
             window.requestAnimationFrame(step);
@@ -43,16 +48,4 @@ function loadImageRoll() {
     }
   };
   input.click();
-
-  const smartphoneScreen = document.getElementById("smartphoneScreen");
-  const screenHeight = smartphoneScreen.clientHeight;
-  const scrollDuration = 7000; // スクロールする時間（7秒）
-  let startTime = null;
-  let imgHeight = null;
-  const img = smartphoneScreen.querySelector("img");
-  if (img) {
-    imgHeight = img.clientHeight;
-    window.requestAnimationFrame(step);
-  }
 }
-
