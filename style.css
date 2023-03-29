@@ -1,68 +1,128 @@
-/* styles.css */
-
 /* 共通スタイル */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+body {
+  font-family: Eurostile;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Footer */
+footer {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  padding: 1rem;
+  text-align: center;
+  height: 6%;
+}
+
+.follower {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: rgb(0, 247, 255);
+  border-radius: 50%;
+  pointer-events: none;
+  /* 既存のスタイルをここに保持... マウスCSS*/
+  z-index: 10000;
+}
+
+
+#p5canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -2;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Footer positioning */
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+/* Sketch color change effect */
+@keyframes sketchColorChange {
+  0% {
+    background-color: #000;
   }
-  
-  body {
-    font-family: "Roboto", sans-serif;
+
+  50% {
+    background-color: #fff;
   }
-  
-  /* ヘッダー */
-  header {
-    padding: 1rem;
+
+  100% {
+    background-color: #000;
   }
-  
-  /* メインコンテンツ */
-  main {
-    padding: 1rem;
-  }
-  
-  /* アニメーション */
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-  
-  .fade-in {
-    animation: fadeIn 1s;
-  }
-  
-  /* Header */
-  header {
-    background-color: #f3f3f3;
-    padding: 2rem 1rem;
-  }
-  
-  header h1 {
-    font-size: 2rem;
-  }
-  
-  /* Main content */
-  main section {
-    margin-bottom: 2rem;
-  }
-  
-  /* Footer */
-  footer {
-    background-color: #333;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-  }
-  .fade-in {
-    opacity: 0;
-  }
-  
-  .visible {
-    opacity: 1;
-    animation: fadeIn 1s;
-  }
-    
+}
+
+#p5canvas {
+  animation: sketchColorChange 70s infinite;
+}
+
+input[type="file"] {
+  background-color: transparent;
+  color: rgb(0, 0, 0);
+  color: transparent;
+  text-shadow: none;
+  z-index: 1000;
+}
+
+.footer-content {
+  position: relative;
+}
+
+#csvFile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* 元々は right: 0; でしたが、左端に配置するために left: 0; に変更 */
+  background-color: transparent;
+  /* ボタンの背景色を黒から少し灰色に寄せる */
+}
+
+.hover-animation {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+
+.hover-animation:hover::after {
+  top: 0;
+  z-index: -1;
+}
+
+
+html {
+  overflow-x: hidden;
+}
+
+
+.footer-image {
+  width: 50px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* 既存のCSSに以下のスタイルを追加 */
+.footer-image {
+  height: 100%;
+  object-fit: contain;
+}
+
+/* フェードアウト用 */
+#particleContainer.fade-out {
+  opacity: 0;
+  transition: opacity 7s;
+}
